@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  allowedDevOrigins: ["seeing-trout-framing-hammer.trycloudflare.com"],
 };
 
 export default nextConfig;

@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --orange: #fe663f;
+  --off-white: #f5f4f0;
+  --black: #2e2e2e;
+  --gray: #95929b;
+  --background: #f5f4f0;
+  --foreground: #2e2e2e;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-orange: #fe663f;
+  --color-off-white: #f5f4f0;
+  --color-dark: #2e2e2e;
+  --color-gray: #95929b;
+  --font-sans: 'Cabinet Grotesk', sans-serif;
+  --font-serif: 'Noto Serif', serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'Noto Serif', serif;
+}
+
+::selection {
+  background: #fe663f;
+  color: #f5f4f0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll-triggered fade-in */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.stagger > .fade-up:nth-child(1) { transition-delay: 0ms; }
+.stagger > .fade-up:nth-child(2) { transition-delay: 100ms; }
+.stagger > .fade-up:nth-child(3) { transition-delay: 200ms; }
+.stagger > .fade-up:nth-child(4) { transition-delay: 300ms; }
+.stagger > .fade-up:nth-child(5) { transition-delay: 400ms; }
+.stagger > .fade-up:nth-child(6) { transition-delay: 500ms; }
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Photo hover zoom */
+.photo-zoom {
+  overflow: hidden;
+}
+.photo-zoom img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.photo-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Gradient accent (from banner) */
+.gradient-accent {
+  background: linear-gradient(135deg, #fe663f 0%, #fe663f88 50%, #2e2e2e 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f4f0;
+}
+::-webkit-scrollbar-thumb {
+  background: #95929b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2e2e2e;
+}
+
+/* Form focus glow */
+input:focus, select:focus {
+  box-shadow: 0 0 0 3px rgba(254, 102, 63, 0.15);
 }
