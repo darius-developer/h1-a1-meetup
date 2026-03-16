@@ -1102,6 +1102,7 @@ export default function Home() {
                   </p>
                   <p className="font-sans text-xs text-gray tracking-wider">
                     Alle 6&ndash;8 Wochen &middot; Coworking Space Kiel &middot; Kostenlos
+                    &middot; <a href="https://fairplay-management.de/impressum/" target="_blank" rel="noopener noreferrer" className="interactive underline hover:text-dark transition-colors">Impressum</a>
                   </p>
                 </div>
               </FadeUp>
