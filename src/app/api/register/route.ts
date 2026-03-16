@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     try {
       const { subject, html } = buildConfirmationEmail(name.trim());
       await resend.emails.send({
-        from: "H1-A1 AI Meetup <meetup@h1-a1.de>",
+        from: "H1-A1 AI Meetup <meetup@fairplay.management>",
         to: trimmedEmail,
         subject,
         html,
