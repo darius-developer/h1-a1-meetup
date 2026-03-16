@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
-import { resend, buildConfirmationEmail } from "@/lib/resend";
+import { getResend, buildConfirmationEmail } from "@/lib/resend";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -58,17 +58,19 @@ export async function POST(request: NextRequest) {
   }
 
   // Send confirmation email via Resend
-  try {
-    const { subject, html } = buildConfirmationEmail(name.trim());
-    await resend.emails.send({
-      from: "H1-A1 AI Meetup <meetup@h1-a1.de>",
-      to: trimmedEmail,
-      subject,
-      html,
-    });
-  } catch (emailError) {
-    // Don't fail the registration if email fails
-    console.error("Resend email error:", emailError);
+  const resend = getResend();
+  if (resend) {
+    try {
+      const { subject, html } = buildConfirmationEmail(name.trim());
+      await resend.emails.send({
+        from: "H1-A1 AI Meetup <meetup@h1-a1.de>",
+        to: trimmedEmail,
+        subject,
+        html,
+      });
+    } catch (emailError) {
+      console.error("Resend email error:", emailError);
+    }
   }
 
   return NextResponse.json({ success: true, data });
