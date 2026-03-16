@@ -487,6 +487,8 @@ function HorizontalGallery() {
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: "", email: "", companion: "no" });
+  const [honeypot, setHoneypot] = useState("");
+  const [formLoadedAt] = useState(Date.now());
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -515,7 +517,7 @@ export default function Home() {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, website: honeypot, _t: formLoadedAt }),
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error); setLoading(false); return; }
@@ -987,6 +989,20 @@ export default function Home() {
                   transition={{ duration: 0.5 }}
                   className="space-y-5"
                 >
+                  {/* Honeypot – invisible to humans, bots fill it */}
+                  <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+                    <label htmlFor="website">Website</label>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
                   {[
                     { label: "Name", type: "text", key: "name", placeholder: "Dein Name" },
                     { label: "E-Mail-Adresse", type: "email", key: "email", placeholder: "deine@email.de" },

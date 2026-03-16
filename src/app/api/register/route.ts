@@ -2,9 +2,43 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { getResend, buildConfirmationEmail } from "@/lib/resend";
 
+// Simple in-memory rate limiting per IP
+const rateMap = new Map<string, number[]>();
+const RATE_WINDOW = 60_000; // 1 minute
+const RATE_LIMIT = 5; // max 5 requests per minute
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = (rateMap.get(ip) || []).filter((t) => now - t < RATE_WINDOW);
+  if (timestamps.length >= RATE_LIMIT) return true;
+  timestamps.push(now);
+  rateMap.set(ip, timestamps);
+  return false;
+}
+
 export async function POST(request: NextRequest) {
+  // Rate limiting
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Zu viele Anfragen. Bitte versuche es gleich erneut." },
+      { status: 429 }
+    );
+  }
+
   const body = await request.json();
-  const { name, email, companion } = body;
+  const { name, email, companion, website, _t } = body;
+
+  // Honeypot: if "website" field is filled, it's a bot
+  if (website) {
+    // Pretend success so bots don't retry
+    return NextResponse.json({ success: true, data: [] });
+  }
+
+  // Time-based check: form must take at least 3 seconds to fill
+  if (_t && Date.now() - _t < 3000) {
+    return NextResponse.json({ success: true, data: [] });
+  }
 
   if (!name || !email || companion === undefined) {
     return NextResponse.json(
