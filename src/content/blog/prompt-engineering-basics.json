@@ -1,0 +1,9 @@
+{
+  "slug": "prompt-engineering-basics",
+  "title": "Prompt Engineering: Warum die Frage entscheidet",
+  "date": "2025-02-18",
+  "tags": ["Prompt Engineering", "ChatGPT", "Praxis"],
+  "excerpt": "Das Geheimnis guter KI-Ergebnisse liegt selten im Modell – es liegt in der Frage. Wir erklären, was Prompt Engineering wirklich bedeutet.",
+  "coverImage": "/images/presenters.jpg",
+  "body": "<p>\"Die KI antwortet mir immer so generisch\" – diesen Satz hört man oft. Dabei liegt das Problem fast nie am Modell, sondern daran, wie wir kommunizieren.</p><h2>Was ist ein Prompt?</h2><p>Ein Prompt ist die Eingabe, die du einem KI-System gibst. Das kann eine Frage sein, ein Befehl, eine Beschreibung – oder eine Kombination davon. Je präziser und kontextreicher dieser Prompt ist, desto nützlicher ist die Antwort.</p><h2>Drei Prinzipien, die sofort helfen</h2><p><strong>1. Rolle zuweisen</strong><br>Sag dem Modell, wer es sein soll. \"Antworte wie ein erfahrener UX-Designer\" liefert andere Ergebnisse als eine neutrale Frage.</p><p><strong>2. Kontext geben</strong><br>Was ist deine Situation? Was willst du erreichen? KI-Modelle haben keinen Zugriff auf deinen Hintergrund – du musst ihn selbst liefern.</p><p><strong>3. Format definieren</strong><br>\"Antworte in drei Stichpunkten\", \"Schreib eine kurze E-Mail\", \"Erkläre es wie für einen 10-Jährigen\" – Formatvorgaben helfen enorm.</p><h2>Übung macht den Meister</h2><p>Prompt Engineering ist keine Geheimwissenschaft. Es ist eine Kommunikationsfähigkeit, die sich mit Übung verbessert. Beim H1-A1 Meetup tauschen wir konkrete Beispiele aus – bring deine eigenen Erfahrungen mit.</p>"
+}

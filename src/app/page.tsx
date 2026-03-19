@@ -353,6 +353,7 @@ function Nav() {
             { label: "Was ist das?", href: "#about" },
             { label: "Ablauf", href: "#ablauf" },
             { label: "Impressionen", href: "#impressionen" },
+            { label: "Blog", href: "/blog" },
           ].map((link) => (
             <motion.a
               key={link.href}
