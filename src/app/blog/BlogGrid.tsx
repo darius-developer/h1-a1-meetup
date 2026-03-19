@@ -5,7 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import Lenis from "lenis";
-import { BlogPost } from "@/lib/blog";
+import type { BlogPost } from "@/lib/blog";
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString("de-DE", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
 
 function useSmoothScroll() {
   useEffect(() => {
@@ -21,11 +29,9 @@ function useSmoothScroll() {
 
 function BlogCard({
   post,
-  formatDate,
   index,
 }: {
   post: BlogPost;
-  formatDate: (d: string) => string;
   index: number;
 }) {
   const ref = useRef(null);
@@ -93,10 +99,8 @@ function BlogCard({
 
 export default function BlogGrid({
   posts,
-  formatDate,
 }: {
   posts: BlogPost[];
-  formatDate: (d: string) => string;
 }) {
   useSmoothScroll();
 
@@ -163,7 +167,6 @@ export default function BlogGrid({
               <BlogCard
                 key={post.slug}
                 post={post}
-                formatDate={formatDate}
                 index={i}
               />
             ))}

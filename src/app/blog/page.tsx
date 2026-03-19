@@ -1,4 +1,4 @@
-import { getAllPosts, formatDate } from "@/lib/blog";
+import { getAllPosts } from "@/lib/blog";
 import BlogGrid from "./BlogGrid";
 
 export const metadata = {
@@ -9,5 +9,5 @@ export const metadata = {
 
 export default function BlogPage() {
   const posts = getAllPosts();
-  return <BlogGrid posts={posts} formatDate={formatDate} />;
+  return <BlogGrid posts={posts} />;
 }

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Lenis from "lenis";
-import { BlogPost as BlogPostType } from "@/lib/blog";
+import type { BlogPost as BlogPostType } from "@/lib/blog";
 
 function useSmoothScroll() {
   useEffect(() => {
